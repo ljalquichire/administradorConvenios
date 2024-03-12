@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="path">
+        <img src="assets/images/logo.webp" alt="logo UIS"/>
+        Convenios
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.Admin)">
+            <a class="nav-link" [routerLink]="pathNavigate.Admin" routerLinkActive="active">Administrador</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.Gestor)">
+            <a class="nav-link" [routerLink]="pathNavigate.Gestor" routerLinkActive="active">Gestor</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.Secretaria)">
+            <a class="nav-link" [routerLink]="pathNavigate.Secretaria" routerLinkActive="active">Secretaria</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.DirectorRelex)">
+            <a class="nav-link" [routerLink]="pathNavigate.DirectorRelex" routerLinkActive="active">Director Relex</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.ConsejoAcademico)">
+            <a class="nav-link" [routerLink]="pathNavigate.ConsejoAcademico" routerLinkActive="active">Consejo Académico</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.Vicerrectoria)">
+            <a class="nav-link" [routerLink]="pathNavigate.Vicerrectoria" routerLinkActive="active">Vicerrectoría</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.Rectoria)">
+            <a class="nav-link" [routerLink]="pathNavigate.Rectoria" routerLinkActive="active">Rectoría</a>
+          </li>
+          <li class="nav-item" *ngIf="path.includes(pathNavigate.DirJuridico)">
+            <a class="nav-link" [routerLink]="pathNavigate.DirJuridico" routerLinkActive="active">Director Jurídico</a>
+          </li>
+        </ul>
+
+        <button class="navbar-text" (click)="logout()">
+          Cerrar Sessión
+        </button>
+      </div>
+    </div>
+  </nav>

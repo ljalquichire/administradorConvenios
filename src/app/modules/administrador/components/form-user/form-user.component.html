@@ -1,0 +1,74 @@
+<div class="form-user-cont">
+    <h1 mat-dialog-title>Datos del Usuario</h1>
+    <form class="form-user" [formGroup]="formGroup">
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[0] }}
+                <ng-container *ngIf="typeForm === 'EDIT'">
+                    <span class="text-danger">Solo lectura</span>
+                </ng-container>
+            </mat-label>
+            <input type="number" matInput [readonly]="typeForm === 'EDIT'" [formControlName]="formFields[0]">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[2] }} </mat-label>
+            <input matInput [formControlName]="formFields[2]">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[3] }} </mat-label>
+            <input matInput [formControlName]="formFields[3]">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[4] }} </mat-label>
+            <input type="email" matInput [formControlName]="formFields[4]">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[5] }} 6 dig </mat-label>
+            <input [type]="showPassword ? 'text' : 'password'" matInput [formControlName]="formFields[5]">
+            <mat-icon matSuffix (click)="showPassword = !showPassword">
+                <fa-icon [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+            </mat-icon>
+            <small class="text-danger text-repeat" *ngIf="passwordMatchError">La contraseña no coincide</small>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[6] }} 6 dig </mat-label>
+            <input [type]="showRepeatPassword ? 'text' : 'password'" matInput [formControlName]="formFields[6]">
+            <mat-icon matSuffix (click)="showRepeatPassword = !showRepeatPassword">
+                <fa-icon [icon]="showRepeatPassword ? faEyeSlash : faEye"></fa-icon>
+            </mat-icon>
+            <small class="text-danger text-repeat" *ngIf="passwordMatchError">La contraseña no coincide</small>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label> {{ titleForm[7] }} </mat-label>
+            <mat-select [formControlName]="formFields[7]">
+                <mat-option *ngFor="let i of roles" [value]="i.id"> {{ i.nombre }} </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <ng-container class="my-2" *ngIf="typeForm === 'EDIT'">
+            <section class="form-group">
+                <mat-checkbox class="example-margin" [(ngModel)]="checkSignature" [ngModelOptions]="{standalone: true}">¿Desea editar la firma?</mat-checkbox>
+            </section>
+        </ng-container>
+
+        <div class="my-2" *ngIf="typeForm !== 'EDIT' || checkSignature">
+            <label for="formFile" class="form-label"> {{ titleForm[8] }} </label>
+            <input class="form-control" type="file" id="formFile"  (change)="onFileSelected($event)">
+        </div>
+
+        <div *ngIf="typeForm === 'EDIT' && !!signatureAlias?.value">
+            <h3 class="border-top border-bottom text-center"> Firma Subida </h3>
+            <img class="photo border" [src]="'data:image/jpg;base64,' + signatureAlias?.value" width="300px" />
+        </div>
+    </form>
+
+    <div class="col-12 d-flex justify-content-center mt-3">
+        <button class="mx-2" mat-raised-button (click)="dialogRef.close()">Cancelar</button>
+        <button class="mx-2" [disabled]="formGroup.invalid" mat-raised-button (click)="save()">Guardar</button>
+    </div>
+
+</div>
